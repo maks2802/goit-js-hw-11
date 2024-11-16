@@ -11,8 +11,11 @@ document.querySelector('#search-form').addEventListener('submit', onSearch);
 
 async function onSearch(event) {
   event.preventDefault();
-  
+
   const query = event.target.elements.searchQuery.value.trim();
+
+  clearGallery();
+
   if (!query) {
     iziToast.warning({
       title: "Warning",
@@ -48,6 +51,11 @@ async function onSearch(event) {
   }
 }
 
+function clearGallery() {
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = '';
+}
+
 function initLightbox() {
   if (lightbox) lightbox.destroy();
   lightbox = new SimpleLightbox('.gallery-item', { captionsData: 'alt', captionDelay: 250 });
@@ -62,4 +70,3 @@ function hideLoadingIndicator() {
   const indicator = document.getElementById('loading-indicator');
   indicator.style.display = 'none';
 }
-
